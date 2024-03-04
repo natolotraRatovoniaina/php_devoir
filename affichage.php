@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,18 +10,16 @@
 <body>
     <div class="div_table">
             <?php
+                session_start();
+                
                 if($_POST["a_initial"]!='' && $_POST["b_initial"]!='')
                 {   
                     $a = $_POST["a_initial"];
                     $b = $_POST["b_initial"];
-                    session_start();
-                    $_SESSION['a_initial'] = $a;
                     $_SESSION['b_initial'] = $b;
                 }
                 else
                 {
-                    session_start();
-                    $a = $_SESSION['a_initial'];
                     $b = $_SESSION['b_initial'];
                 }
 
@@ -31,11 +30,9 @@
                 $b_modifier = $_POST["b_modifier"];
 
                 if($index_a_supprimer!='')
-                {
-                    session_start();
-                    
-                    $table_a = $_SESSION['initial_table_a'][0];
-                    $table_b = $_SESSION['initial_table_b'][0];
+                {   
+                    $table_a = $_SESSION['initial_table_a'];
+                    $table_b = $_SESSION['initial_table_b'];
 
                     array_splice($table_a,$index_a_supprimer,1);
                     array_splice($table_b,$index_a_supprimer,1);
@@ -46,22 +43,20 @@
                     
                     $_SESSION['b_initial'] = $b;
                     
-                    $_SESSION['initial_table_a'] = array($table_a);
-                    $_SESSION['initial_table_b'] = array($table_b);
+                    $_SESSION['initial_table_a'] = $table_a;
+                    $_SESSION['initial_table_b'] = $table_b;
                 }
 
                 else if($index_a_modifier!='')
-                {
-                    session_start();
-                    
-                    $table_a = $_SESSION['initial_table_a'][0];
-                    $table_b = $_SESSION['initial_table_b'][0];
+                {    
+                    $table_a = $_SESSION['initial_table_a'];
+                    $table_b = $_SESSION['initial_table_b'];
                     
                     $table_a[$index_a_modifier] = $a_modifier;
                     $table_b[$index_a_modifier] = $b_modifier;
 
-                    $_SESSION['initial_table_a'] = array($table_a);
-                    $_SESSION['initial_table_b'] = array($table_b);
+                    $_SESSION['initial_table_a'] = $table_a;
+                    $_SESSION['initial_table_b'] = $table_b;
                 }
                 
                 else
@@ -70,11 +65,8 @@
                         $table_a[$i] = $a;
                         $table_b[$i] = $i+1;
                     }
-
-                    session_start();
-
-                    $_SESSION['initial_table_a'] = array($table_a);
-                    $_SESSION['initial_table_b'] = array($table_b);
+                    $_SESSION['initial_table_a'] = $table_a;
+                    $_SESSION['initial_table_b'] = $table_b;
                 }
             ?>
         <table>
