@@ -111,6 +111,10 @@
                             </tr>";
                     }
                 }
+                if($b == 0)
+                {
+                    header("Location: http://www.web.com/donnees.php");
+                }
             ?>
         </table>
     </div>
